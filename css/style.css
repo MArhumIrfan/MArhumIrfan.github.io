@@ -3,7 +3,7 @@
 @font-face {
     font-family: 'Talina';
     /* Make sure this path matches exactly where you put the file */
-    src: url('../fonts/Talina DEMO.otf') format('opentype'); 
+    src: url('fonts/Talina%20DEMO.otf') format('opentype'); 
     font-weight: normal;
     font-style: normal;
 }
