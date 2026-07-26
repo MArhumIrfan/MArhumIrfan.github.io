@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Arhum - Personal Portfolio </title>
     <link rel="icon" type="image/x-icon" href="./images/goggame-1525634891.ico">
-    <link rel="stylesheet" href="style.css">
     
     <!-- Link to your external stylesheet so the font loads! -->
-    
+    <link rel="stylesheet" href="style.css">
     
     <style>
         /* Your CSS starts here. VS Code will now colorize it! */
         @font-face {
-    font-family: 'Talina';
-    src: url('https://marhumirfan.github.io/fonts/talina.otf') format('opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
+            font-family: 'Talina';
+            src: url('https://marhumirfan.github.io/fonts/talina.otf') format('opentype'); 
+            font-weight: normal;
+            font-style: normal;
+        }
 
-      :root {
+        :root {
             --primary: #9EB3C2; /* Your lightest pastel blue for accents */
             --primary-glow: rgba(158, 179, 194, 0.4); /* RGB version of 9EB3C2 for the glow */
             --bg-dark: #21295C; /* Your deepest navy for the base */
@@ -50,13 +49,12 @@
         }
 
         h1, h2, h3, h4 {
-    /* This is the missing link! */
-    font-family: 'Talina', sans-serif; 
-    color: var(--primary);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    }
+            font-family: 'Talina', sans-serif; 
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
         section {
             background: var(--card-bg);
@@ -74,7 +72,7 @@
         section:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px 0 var(--primary-glow);
-            border: 1px solid rgba(0, 229, 255, 0.2);
+            border: 1px solid rgba(158, 179, 194, 0.2);
         }
 
         .container {
@@ -101,7 +99,7 @@
         .overlay {
             position: absolute; 
             bottom: 0; 
-            background: rgba(0, 229, 255, 0.8);
+            background: rgba(158, 179, 194, 0.8);
             width: 100%;
             height: 100%;
             display: flex;
@@ -134,7 +132,7 @@
         }
 
         th {
-            background: rgba(0, 229, 255, 0.1);
+            background: rgba(158, 179, 194, 0.1);
             color: var(--primary);
             font-weight: 600;
         }
@@ -158,7 +156,7 @@
 
         li:hover {
             transform: translateX(10px);
-            background: rgba(0, 229, 255, 0.1);
+            background: rgba(158, 179, 194, 0.1);
         }
 
         button {
@@ -187,57 +185,50 @@
 
         a:hover {
             text-decoration: underline;
-            /* Floating 3D Model Styling */
+        }
             
-.floating-model {
-    display: block;
-    width: 100%;
-    max-width: 500px; /* Makes it large and imposing */
-    height: 400px;
-    margin: 0 auto 30px auto;
-    background-color: transparent;
-    /* This creates a glowing aura around the actual 3D shape */
-    filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.4));
-    outline: none;
-    cursor: grab;
-}
+        /* Floating 3D Model Styling */
+        .floating-model {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            margin: 0 auto 30px auto;
+            background-color: transparent;
+            filter: drop-shadow(0 0 25px rgba(158, 179, 194, 0.4));
+            outline: none;
+            cursor: grab;
+        }
 
-.floating-model:active {
-    cursor: grabbing;
-}
+        .floating-model:active {
+            cursor: grabbing;
         }
     </style>
 </head>   
 <body>
+
 <section>
     <h1> Welcome to my personal portfolio! </h1>
 
-        <!-- Free-floating 3D Model -->
-<!-- Free Google Robot Model -->
-<model-viewer 
-    class="floating-model"
-    /* Update this line to point to your local file! */
-    src="./models/commodore64.glb" 
-    alt="3D Computer Model" 
-    auto-rotate 
-    rotation-per-second="30deg"
-    camera-controls 
-    disable-zoom
-    shadow-intensity="2"
-    exposure="1.2">
-</model-viewer>
+    <!-- Free-floating 3D Model -->
+    <model-viewer 
+        class="floating-model"
+        src="./models/commodore64.glb" 
+        alt="3D Computer Model" 
+        auto-rotate 
+        rotation-per-second="30deg"
+        camera-controls 
+        disable-zoom
+        shadow-intensity="2"
+        exposure="1.2">
+    </model-viewer>
     
-   
-
     <p> My name is Muhammad Arhum Irfan and I am a software developer. </p>
     <p>I have experience in various programming languages and frameworks.</p>
     <p>I am passionate about creating innovative solutions and continuously learning new technologies.</p>    
-        <button type ="button" onclick="document.getElementById('demo').innerHTML = Date()"> Click me to display Date</button>
-        <p id="demo"></p>
-     
+    <button type="button" onclick="document.getElementById('demo').innerHTML = Date()"> Click me to display Date</button>
+    <p id="demo"></p>
 </section>
-
-<!-- Paste this right after the Welcome </section> and right before the Portfolio <section> -->
 
 <section>
     <h2>Skills & Technologies</h2>
@@ -316,15 +307,18 @@
 </section>
 
 <section>
-<h4>Contact Information</h4>    
+    <h4>Contact Information</h4>    
     <p> Please feel free to explore my projects and contact me for any inquiries or collaborations. </p>
     <p><strong>Email:</strong> arhumirfan2022@gmail.com</p>
     <p><strong>Phone:</strong> Coming Soon!</p>
     <p><strong>Instagram:</strong> @m.arhum.irfan <a href="https://www.instagram.com/m.arhum.irfan/" target="_blank">View Profile</a></p>
     <button onclick="alert('Thank you for visiting my portfolio!')">Click Me</button>
 </section> 
-   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-   <!-- GSAP Libraries -->
+
+<!-- Scripts -->
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+<!-- GSAP Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
@@ -348,7 +342,6 @@
     });
   });
 
-  // Animate the individual project cards specifically
   // Animate the individual dropdown cards specifically
   gsap.from(".dropdown-card", {
     scrollTrigger: {
@@ -372,22 +365,16 @@
   document.addEventListener('DOMContentLoaded', function() {
       const ctx = document.getElementById('skillsRadarChart').getContext('2d');
       
-      // Pulling your oceanic pastel blue for the chart lines!
       const primaryColor = '#9EB3C2'; 
       const primaryGlow = 'rgba(158, 179, 194, 0.4)';
       
       new Chart(ctx, {
           type: 'radar',
           data: {
-              // The programming languages around the web
               labels: ['Python', 'C++', 'Java', 'C# & .NET', 'HTML/CSS/JS', 'SQL'],
               datasets: [{
                   label: 'Skill Level',
-                  // YOUR STATS: Change these numbers (out of 100) to adjust the web shape!
-                  // They correspond in order to the labels above.
-                  // Python, C++, Java, C# & .NET, HTML/CSS/JS, SQL
-                data: [90, 85, 83, 80, 77.59, 85], 
-                  
+                  data: [90, 85, 83, 80, 85, 88], 
                   backgroundColor: primaryGlow,
                   borderColor: primaryColor,
                   pointBackgroundColor: primaryColor,
@@ -403,21 +390,21 @@
               scales: {
                   r: {
                       angleLines: {
-                          color: 'rgba(255, 255, 255, 0.1)' // Faint background web lines
+                          color: 'rgba(255, 255, 255, 0.1)' 
                       },
                       grid: {
-                          color: 'rgba(255, 255, 255, 0.1)', // Circular grid lines
+                          color: 'rgba(255, 255, 255, 0.1)', 
                           circular: true
                       },
                       pointLabels: {
-                          color: '#f8fafc', // Off-white text for the language names
+                          color: '#f8fafc', 
                           font: {
                               size: 14,
                               family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
                           }
                       },
                       ticks: {
-                          display: false, // Hides the 0-100 numbers so it looks like a clean game UI
+                          display: false, 
                           min: 0,
                           max: 100
                       }
@@ -425,7 +412,7 @@
               },
               plugins: {
                   legend: {
-                      display: false // Hides the legend since we only have one dataset
+                      display: false 
                   }
               }
           }
@@ -434,5 +421,4 @@
 </script>
 
 </body>
-
 </html>
