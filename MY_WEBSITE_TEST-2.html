@@ -1,79 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Arhum - Personal Portfolio </title>
+    <link rel="icon" type="image/x-icon" href="./images/goggame-1525634891.ico">
+    
+    <style>
+        /* Your CSS starts here. VS Code will now colorize it! */
+        :root {
+            --primary: #00e5ff;
+            --primary-glow: rgba(0, 229, 255, 0.4);
+            --bg-dark: #0a0a0f;
+            --card-bg: rgba(20, 25, 35, 0.6);
+            --text-main: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0a0a0f, #131127, #0d1b2a, #0a0a0f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-main);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        section {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 0 auto 40px auto;
+            max-width: 900px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 var(--primary-glow);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
+        .container {
+            position: relative;
+            width: 250px;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .container img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            transition: transform 0.5s ease;
+        }
+
+        .container:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute; 
+            bottom: 0; 
+            background: rgba(0, 229, 255, 0.8);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .5s ease;
+            opacity: 0;
+            color: #000;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .container:hover .overlay {
+            opacity: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(0, 229, 255, 0.1);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            background: rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateX(10px);
+            background: rgba(0, 229, 255, 0.1);
+        }
+
+        button {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            /* Floating 3D Model Styling */
             
-* {box-sizing: border-box;}
+.floating-model {
+    display: block;
+    width: 100%;
+    max-width: 500px; /* Makes it large and imposing */
+    height: 400px;
+    margin: 0 auto 30px auto;
+    background-color: transparent;
+    /* This creates a glowing aura around the actual 3D shape */
+    filter: drop-shadow(0 0 25px rgba(0, 229, 255, 0.4));
+    outline: none;
+    cursor: grab;
+}
 
-    .container {
-  position: relative;
-  width: 50%;
-  max-width: 253px;}
-
-    .image {
-  display: block;
-  width: 100%;
-  height: auto;}
-
-    .overlay {
-  position: absolute; 
-  bottom: 0; 
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
-  color: #f1f1f1; 
-  width: 100%;
-  transition: .5s ease;
-  opacity:0;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;}
-
-    .container:hover .overlay {opacity: 1;}
-            body {
-                background-color: #d3d3d3;
-                background : linear-gradient( #ffffff,#007acc5d,#0a5383a2);
-        
-                font-family: Arial, sans-serif;
-                color: #333;
-                margin: 20px;
-                min-height: 100vh;
-            }
-            h1, h2, h3, h4 {
-                color: #007acc;
-            }
-            table {
-                width: 50%;
-                border-collapse: collapse;
-                margin-bottom: 20px;
-            }
-            th, td {
-                padding: 10px;
-                text-align: left;
-            }
-            th {
-                background-color: #007acc;
-                background: linear-gradient(#007acc, #0a5383, #011522);
-                color: white;
-            }
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-            </style>
-<title> Arhum - Personal Portfolio </title>
-<link rel="icon" type="image/x-icon" href="C:\Users\Arhum\OneDrive\Desktop\goggame-1525634891.ico">
-     </head>   
+.floating-model:active {
+    cursor: grabbing;
+}
+        }
+    </style>
+</head>   
 <body>
 <section>
     <h1> Welcome to my personal portfolio! </h1>
 
-        <div class="container">
-        <img style="border: 1.5px solid #000000;" src="C:\Users\Arhum\OneDrive\Desktop\MY PIC.jpg" alt="Example Profile Picture" width="253" height="253">
-        <div class="overlay">
-            <p> Example Image </p>
-        </div>
-        </div>
+        <!-- Free-floating 3D Model -->
+<!-- Free Google Robot Model -->
+<model-viewer 
+    class="floating-model"
+    src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" 
+    alt="3D Robot Model" 
+    auto-rotate 
+    rotation-per-second="30deg"
+    camera-controls 
+    disable-zoom
+    shadow-intensity="2"
+    exposure="1.2">
+</model-viewer>
+    
+   
+</div>
     <p> My name is Muhammad Arhum Irfan and I am a software developer. I have experience in various programming languages and frameworks.</p>
     <p>I am passionate about creating innovative solutions and continuously learning new technologies.</p>    
         <button type ="button" onclick="document.getElementById('demo').innerHTML = Date()"> Click me to display Date</button>
@@ -82,51 +222,117 @@
 </section>
     
 <section>
-<h2>My Skills</h2>
-    <table border="1.5">
-        <tr>
-            <th><strong>Programming Language</strong></th>
-            <th><strong>Understanding</strong></th>
-        </tr>
-        <tr>
-            <td>Python</td>
-            <td>Begineer</td>
-        </tr>
-        <tr>
-            <td>Java</td>
-            <td>Intermediate</td>
-        </tr>
-        <tr>
-            <td>C++</td>
-            <td>Intermediate</td>            
-        </tr>
-        <tr>
-            <td>HTML</td>
-            <td>Begineer</td>
-        </tr>
-    </table>  
-</section>  
+    <h2>Development Portfolio</h2>
+    <p>A collection of front-end, back-end, and desktop software solutions.</p>
+    
+    <div class="project-grid">
+        <!-- Python & SQL -->
+        <div class="project-card">
+            <h4>Python </h4>
+            <ul>
+                <li>Full-Stack Gym Management System (SSMS & Tkinter)</li>
+                <li>SecurePass Pro (GUI Password Generator)</li>
+                <li>Interactive Morse Code Learning System</li>
+                <li>Inventory Sorting System CLI</li>
+                <li>Multi-Menu GUI Calculator Suite</li>
+            </ul>
+        </div>
 
-<section>
-<h3>Projects</h3>
-    <ul>
-        <li><strong>Project 1:</strong> A unit converter application made in C++.</li>
-        <li><strong>Project 2:</strong> A library management system made in Java and GUI.</li>
-        <li><strong>Project 3:</strong> A number guessing game made in C++ with DSA Properties.</li>
-        <li><strong>Project 4:</strong> A simple gym management system using SQL SSMS and managed by GUI Tkinker in Python.</li>
-        <li><strong>Project 5:</strong> A password generator application made in Python with a graphical user interface Tkinter.</li>
+        <!-- C++ -->
+        <div class="project-card">
+            <h4>C++</h4>
+            <ul>
+                <li>OpenGL Graphic Programming</li>
+                <li>Mini E-commerce Simulation</li>
+                <li>Management System GUI</li>
+                <li>Basic 2D Game</li>
+                <li>Text & GUI Notepad Applications</li>
+                <li>TCP Client User Software</li>
+            </ul>
+        </div>
 
-    </ul>
+        <!-- Java -->
+        <div class="project-card">
+            <h4>Java</h4>
+            <ul>
+                <li>Library Management System GUI</li>
+                <li>Text & GUI Notepad Applications</li>
+                <li>Calculator Suite</li>
+            </ul>
+        </div>
+
+        <!-- Web & UI/UX -->
+        <div class="project-card">
+            <h4>Web, HTML & Design</h4>
+            <ul>
+                <li>iBoss Games Web Architecture Redesign (Figma)</li>
+                <li>Personal Portfolio Website (HTML/CSS/JS)</li>
+                <li>Interactive To-Do List with Live Calendar</li>
+                <li>Financial Tracker Web GUI</li>
+            </ul>
+        </div>
+
+        <!-- C# & Mobile -->
+        <div class="project-card">
+            <h4>C#, Android & Other</h4>
+            <ul>
+                <li>Android Financial Tracker Application</li>
+                <li>Android Random Number Guessing Game</li>
+                <li>C# Console Calculator</li>
+                <li>First-Person Shooter (Scratch Engine)</li>
+                <li>SQL based Gym Management system</li>
+            </ul>
+        </div>
+    </div>
 </section>
 
 <section>
 <h4>Contact Information</h4>    
     <p> Please feel free to explore my projects and contact me for any inquiries or collaborations. </p>
-    <p><strong>Email:</strong> arhum@example.com</p>
-    <p><strong>Phone:</strong> 123-456-7890</p>
+    <p><strong>Email:</strong> arhumirfan2022@gmail.com</p>
+    <p><strong>Phone:</strong> Coming Soon!</p>
     <p><strong>Instagram:</strong> @m.arhum.irfan <a href="https://www.instagram.com/m.arhum.irfan/" target="_blank">View Profile</a></p>
     <button onclick="alert('Thank you for visiting my portfolio!')">Click Me</button>
-</section>    
+</section> 
+   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+   <!-- GSAP Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Custom GSAP Animation -->
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Animate the main sections
+  const sections = document.querySelectorAll("section");
+  sections.forEach((section) => {
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+      y: 80,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    });
+  });
+
+  // Animate the individual project cards specifically
+  gsap.from(".project-card", {
+    scrollTrigger: {
+      trigger: ".project-grid",
+      start: "top 80%",
+      toggleActions: "play none none reverse",
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.15, // This is the magic! Delays each card by 0.15 seconds
+    ease: "back.out(1.7)" // Adds a slight "bounce" effect as they arrive
+  });
+</script>
 </body>
 
 </html> 
