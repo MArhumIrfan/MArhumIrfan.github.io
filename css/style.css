@@ -1,5 +1,22 @@
 /* Professional Website Styles */
 
+@font-face {
+    font-family: 'Talina';
+    /* Make sure this path matches exactly where you put the file */
+    src: url('../fonts/Talina DEMO.otf') format('opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+h1,h2,h3,h4,h5,h6
+{
+    font-family: 'Talina';
+}
+
+.project-title, hero-heading
+{
+    font-family: 'Talina',sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
