@@ -9,7 +9,7 @@
 }
 h1,h2,h3,h4,h5,h6
 {
-    font-family: 'Talina',sans-serif;
+    font-family: 'Talina',sans-serif,'Courier New', Courier, monospace;
 }
 
 .project-title, hero-heading
