@@ -2,8 +2,8 @@
 
 @font-face {
     font-family: 'Talina';
-    /* Make sure this path matches exactly where you put the file */
-    src: url('fonts/Talina%20DEMO.otf') format('opentype'); 
+    /* Update this line to match your new GitHub file name! */
+    src: url('fonts/talina.otf') format('opentype'); 
     font-weight: normal;
     font-style: normal;
 }
