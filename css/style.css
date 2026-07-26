@@ -6,9 +6,13 @@
     font-weight: normal;
     font-style: normal;
 }
-h1,h2,h3,h4,h5,h6
-{
-    font-family: 'Talina',sans-serif,'Courier New', Courier, monospace;
+h1, h2, h3, h4 {
+    /* If this line is missing or misspelled, the browser will not download the file! */
+    font-family: 'Talina', sans-serif; 
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 /* Missing period added here! */
