@@ -276,49 +276,83 @@ footer {
     }
 }
 /* Project Grid Layout */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
+/* --- Interactive Dropdown Portfolio --- */
+        .portfolio-dropdowns {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
 
-.project-card {
-    background: rgba(10, 15, 25, 0.5);
-    border: 1px solid rgba(0, 229, 255, 0.1);
-    border-radius: 12px;
-    padding: 25px;
-    transition: all 0.3s ease;
-}
+        .dropdown-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
 
-.project-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(0, 229, 255, 0.2);
-    border-color: var(--primary);
-}
+        .dropdown-card:hover {
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
 
-.project-card h4 {
-    color: #fff;
-    border-bottom: 2px solid var(--primary);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-}
+        /* The clickable button part */
+        .dropdown-card summary {
+            padding: 20px 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-main);
+            cursor: pointer;
+            list-style: none; /* Hides default triangle */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
 
-.project-card ul {
-    list-style: none;
-}
+        /* Hide the default webkit triangle for Safari/Chrome */
+        .dropdown-card summary::-webkit-details-marker {
+            display: none;
+        }
 
-.project-card li {
-    background: transparent;
-    border: none;
-    border-left: 2px solid var(--primary-glow);
-    padding: 8px 15px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-}
+        /* Create our own custom animated arrow */
+        .dropdown-card summary::after {
+            content: '▼';
+            color: var(--primary);
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
 
-.project-card li:hover {
-    background: rgba(0, 229, 255, 0.05);
-    transform: translateX(5px);
-}
+        /* Flip the arrow when the dropdown is open */
+        .dropdown-card[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-card summary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+        }
+
+        /* The list of projects inside */
+        .dropdown-card ul {
+            padding: 20px 25px;
+            list-style: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dropdown-card li {
+            background: transparent;
+            border: none;
+            border-left: 2px solid var(--primary-glow);
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-card li:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
