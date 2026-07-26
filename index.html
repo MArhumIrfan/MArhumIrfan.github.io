@@ -1,91 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Website - John Doe</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            
+* {box-sizing: border-box;}
+
+    .container {
+  position: relative;
+  width: 50%;
+  max-width: 253px;}
+
+    .image {
+  display: block;
+  width: 100%;
+  height: auto;}
+
+    .overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;}
+
+    .container:hover .overlay {opacity: 1;}
+            body {
+                background-color: #d3d3d3;
+                background : linear-gradient( #ffffff,#007acc5d,#0a5383a2);
+        
+                font-family: Arial, sans-serif;
+                color: #333;
+                margin: 20px;
+                min-height: 100vh;
+            }
+            h1, h2, h3, h4 {
+                color: #007acc;
+            }
+            table {
+                width: 50%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            th, td {
+                padding: 10px;
+                text-align: left;
+            }
+            th {
+                background-color: #007acc;
+                background: linear-gradient(#007acc, #0a5383, #011522);
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            </style>
+<title> Arhum - Personal Portfolio </title>
+<link rel="icon" type="image/x-icon" href="./images/goggame-1525634891.ico">
+     </head>   
 <body>
-    <header>
-        <nav>
-            <div class="logo">John Doe</div>
-            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<section>
+    <h1> Welcome to my personal portfolio! </h1>
 
-    <section id="home" class="hero">
-        <div>
-            <h1>Welcome to My Professional Website</h1>
-            <p>Delivering excellence in web development and design</p>
-            <a href="#contact" class="btn">Get In Touch</a>
+        <div class="container">
+        <img style="border: 1.5px solid #000000;" src="./images/MY PIC.jpg" alt="Example Profile Picture" width="253" height="253">
+        <div class="overlay">
+            <p> Example Image </p>
         </div>
-    </section>
-
-    <section id="about" class="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <img src="https://via.placeholder.com/300x300?text=John+Doe" alt="John Doe">
-            <div>
-                <h3>Hello, I'm John Doe</h3>
-                <p>I am a passionate web developer with over 5 years of experience in creating beautiful, functional, and user-friendly websites. My expertise includes front-end development, responsive design, and modern web technologies.</p>
-                <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities.</p>
-                <a href="#contact" class="btn">Learn More</a>
-            </div>
         </div>
-    </section>
+    <p> My name is Muhammad Arhum Irfan and I am a software developer. I have experience in various programming languages and frameworks.</p>
+    <p>I am passionate about creating innovative solutions and continuously learning new technologies.</p>    
+        <button type ="button" onclick="document.getElementById('demo').innerHTML = Date()"> Click me to display Date</button>
+        <p id="demo"></p>
+     
+</section>
+    
+<section>
+<h2>My Skills</h2>
+    <table border="1.5">
+        <tr>
+            <th><strong>Programming Language</strong></th>
+            <th><strong>Understanding</strong></th>
+        </tr>
+        <tr>
+            <td>Python</td>
+            <td>Beginner</td>
+        </tr>
+        <tr>
+            <td>Java</td>
+            <td>Intermediate</td>
+        </tr>
+        <tr>
+            <td>C++</td>
+            <td>Intermediate</td>            
+        </tr>
+        <tr>
+            <td>HTML</td>
+            <td>Beginner</td>
+        </tr>
+    </table>  
+</section>  
 
-    <section id="services" class="services">
-        <h2>My Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Web Development</h3>
-                <p>Custom website development using the latest technologies and best practices to create fast, secure, and scalable web applications.</p>
-            </div>
-            <div class="service-card">
-                <h3>Responsive Design</h3>
-                <p>Ensuring your website looks great and functions perfectly on all devices, from desktops to smartphones.</p>
-            </div>
-            <div class="service-card">
-                <h3>UI/UX Design</h3>
-                <p>Creating intuitive and engaging user interfaces that provide excellent user experiences and drive conversions.</p>
-            </div>
-            <div class="service-card">
-                <h3>SEO Optimization</h3>
-                <p>Optimizing your website for search engines to improve visibility and drive more organic traffic to your site.</p>
-            </div>
-        </div>
-    </section>
+<section>
+<h3>Projects</h3>
+    <ul>
+        <li><strong>Project 1:</strong> A unit converter application made in C++.</li>
+        <li><strong>Project 2:</strong> A library management system made in Java and GUI.</li>
+        <li><strong>Project 3:</strong> A number guessing game made in C++ with DSA Properties.</li>
+        <li><strong>Project 4:</strong> A simple gym management system using SQL SSMS and managed by GUI Tkinker in Python.</li>
+        <li><strong>Project 5:</strong> A password generator application made in Python with a graphical user interface Tkinter.</li>
 
-    <section id="contact" class="contact">
-        <h2>Contact Me</h2>
-        <form id="contact-form" class="contact-form">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="btn">Send Message</button>
-        </form>
-    </section>
+    </ul>
+</section>
 
-    <footer>
-        <p>&copy; 2024 John Doe. All rights reserved.</p>
-    </footer>
-
-    <script src="js/script.js"></script>
+<section>
+<h4>Contact Information</h4>    
+    <p> Please feel free to explore my projects and contact me for any inquiries or collaborations. </p>
+    <p><strong>Email:</strong> arhum@example.com</p>
+    <p><strong>Phone:</strong> 123-456-7890</p>
+    <p><strong>Instagram:</strong> @m.arhum.irfan <a href="https://www.instagram.com/m.arhum.irfan/" target="_blank">View Profile</a></p>
+    <button onclick="alert('Thank you for visiting my portfolio!')">Click Me</button>
+</section>    
 </body>
-</html>
+
+</html> 

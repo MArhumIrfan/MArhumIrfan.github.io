@@ -194,26 +194,50 @@
         }
     </style>
 </head>   
+    .container:hover .overlay {opacity: 1;}
+            body {
+                background-color: #d3d3d3;
+                background : linear-gradient( #ffffff,#007acc5d,#0a5383a2);
+        
+                font-family: Arial, sans-serif;
+                color: #333;
+                margin: 20px;
+                min-height: 100vh;
+            }
+            h1, h2, h3, h4 {
+                color: #007acc;
+            }
+            table {
+                width: 50%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            th, td {
+                padding: 10px;
+                text-align: left;
+            }
+            th {
+                background-color: #007acc;
+                background: linear-gradient(#007acc, #0a5383, #011522);
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            </style>
+<title> Arhum - Personal Portfolio </title>
+<link rel="icon" type="image/x-icon" href="./images/goggame-1525634891.ico">
+     </head>   
 <body>
 <section>
     <h1> Welcome to my personal portfolio! </h1>
 
-        <!-- Free-floating 3D Model -->
-<!-- Free Google Robot Model -->
-<model-viewer 
-    class="floating-model"
-    src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" 
-    alt="3D Robot Model" 
-    auto-rotate 
-    rotation-per-second="30deg"
-    camera-controls 
-    disable-zoom
-    shadow-intensity="2"
-    exposure="1.2">
-</model-viewer>
-    
-   
-</div>
+        <div class="container">
+        <img style="border: 1.5px solid #000000;" src="C:\Users\Arhum\OneDrive\Desktop\MY PIC.jpg" alt="Example Profile Picture" width="253" height="253">
+        <div class="overlay">
+            <p> Example Image </p>
+        </div>
+        </div>
     <p> My name is Muhammad Arhum Irfan and I am a software developer. I have experience in various programming languages and frameworks.</p>
     <p>I am passionate about creating innovative solutions and continuously learning new technologies.</p>    
         <button type ="button" onclick="document.getElementById('demo').innerHTML = Date()"> Click me to display Date</button>
@@ -222,68 +246,41 @@
 </section>
     
 <section>
-    <h2>Development Portfolio</h2>
-    <p>A collection of front-end, back-end, and desktop software solutions.</p>
-    
-    <div class="project-grid">
-        <!-- Python & SQL -->
-        <div class="project-card">
-            <h4>Python </h4>
-            <ul>
-                <li>Full-Stack Gym Management System (SSMS & Tkinter)</li>
-                <li>SecurePass Pro (GUI Password Generator)</li>
-                <li>Interactive Morse Code Learning System</li>
-                <li>Inventory Sorting System CLI</li>
-                <li>Multi-Menu GUI Calculator Suite</li>
-            </ul>
-        </div>
+<h2>My Skills</h2>
+    <table border="1.5">
+        <tr>
+            <th><strong>Programming Language</strong></th>
+            <th><strong>Understanding</strong></th>
+        </tr>
+        <tr>
+            <td>Python</td>
+            <td>Begineer</td>
+        </tr>
+        <tr>
+            <td>Java</td>
+            <td>Intermediate</td>
+        </tr>
+        <tr>
+            <td>C++</td>
+            <td>Intermediate</td>            
+        </tr>
+        <tr>
+            <td>HTML</td>
+            <td>Begineer</td>
+        </tr>
+    </table>  
+</section>  
 
-        <!-- C++ -->
-        <div class="project-card">
-            <h4>C++</h4>
-            <ul>
-                <li>OpenGL Graphic Programming</li>
-                <li>Mini E-commerce Simulation</li>
-                <li>Management System GUI</li>
-                <li>Basic 2D Game</li>
-                <li>Text & GUI Notepad Applications</li>
-                <li>TCP Client User Software</li>
-            </ul>
-        </div>
+<section>
+<h3>Projects</h3>
+    <ul>
+        <li><strong>Project 1:</strong> A unit converter application made in C++.</li>
+        <li><strong>Project 2:</strong> A library management system made in Java and GUI.</li>
+        <li><strong>Project 3:</strong> A number guessing game made in C++ with DSA Properties.</li>
+        <li><strong>Project 4:</strong> A simple gym management system using SQL SSMS and managed by GUI Tkinker in Python.</li>
+        <li><strong>Project 5:</strong> A password generator application made in Python with a graphical user interface Tkinter.</li>
 
-        <!-- Java -->
-        <div class="project-card">
-            <h4>Java</h4>
-            <ul>
-                <li>Library Management System GUI</li>
-                <li>Text & GUI Notepad Applications</li>
-                <li>Calculator Suite</li>
-            </ul>
-        </div>
-
-        <!-- Web & UI/UX -->
-        <div class="project-card">
-            <h4>Web, HTML & Design</h4>
-            <ul>
-                <li>iBoss Games Web Architecture Redesign (Figma)</li>
-                <li>Personal Portfolio Website (HTML/CSS/JS)</li>
-                <li>Interactive To-Do List with Live Calendar</li>
-                <li>Financial Tracker Web GUI</li>
-            </ul>
-        </div>
-
-        <!-- C# & Mobile -->
-        <div class="project-card">
-            <h4>C#, Android & Other</h4>
-            <ul>
-                <li>Android Financial Tracker Application</li>
-                <li>Android Random Number Guessing Game</li>
-                <li>C# Console Calculator</li>
-                <li>First-Person Shooter (Scratch Engine)</li>
-                <li>SQL based Gym Management system</li>
-            </ul>
-        </div>
-    </div>
+    </ul>
 </section>
 
 <section>
