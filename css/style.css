@@ -15,6 +15,55 @@ h1, h2, h3, h4 {
     letter-spacing: 2px;
 }
 
+/* --- Skills Graph Styling --- */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .skill-bar {
+            width: 100%;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .progress-line {
+            height: 12px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .progress-line span {
+            position: absolute;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--primary-glow);
+            /* This animation makes the bars fill up smoothly! */
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: fillBar 1.5s cubic-bezier(0.1, 0.5, 0.5, 1) forwards;
+        }
+
+        @keyframes fillBar {
+            100% {
+                transform: scaleX(1);
+            }
+        }
 /* Missing period added here! */
 .project-title, .hero-heading 
 {
