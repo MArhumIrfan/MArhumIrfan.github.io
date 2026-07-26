@@ -3,13 +3,13 @@
 @font-face {
     font-family: 'Talina';
     /* Make sure this path matches exactly where you put the file */
-    src: url('fonts/Talina%20DEMO.otf') format('opentype'); 
+    src: url('../fonts/Talina%20DEMO.otf') format('opentype'); 
     font-weight: normal;
     font-style: normal;
 }
 h1,h2,h3,h4,h5,h6
 {
-    font-family: 'Talina';
+    font-family: 'Talina',sans-serif;
 }
 
 .project-title, hero-heading
