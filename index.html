@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+<head>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Arhum - Personal Portfolio </title>
     <link rel="icon" type="image/x-icon" href="./images/goggame-1525634891.ico">
     
-    <!-- Link to your external stylesheet so the font loads! -->
-    <link rel="stylesheet" href="style.css?v=2">
-    
     <style>
-        /* Your CSS starts here. VS Code will now colorize it! */
         @font-face {
             font-family: 'Talina';
             src: url('https://marhumirfan.github.io/fonts/talina.otf') format('opentype'); 
@@ -19,11 +15,11 @@
         }
 
         :root {
-            --primary: #9EB3C2; /* Your lightest pastel blue for accents */
-            --primary-glow: rgba(158, 179, 194, 0.4); /* RGB version of 9EB3C2 for the glow */
-            --bg-dark: #21295C; /* Your deepest navy for the base */
-            --card-bg: rgba(27, 59, 111, 0.6); /* Your #1B3B6F blue made transparent for the cards */
-            --text-main: #f8fafc; /* Crisp off-white to keep paragraphs highly readable */
+            --primary: #9EB3C2; 
+            --primary-glow: rgba(158, 179, 194, 0.4); 
+            --bg-dark: #21295C; 
+            --card-bg: rgba(27, 59, 111, 0.6); 
+            --text-main: #f8fafc; 
         }
 
         * {
@@ -400,9 +396,6 @@
     <button onclick="alert('Thank you for visiting my portfolio!')">Click Me</button>
 </section> 
 
-<!-- Scripts -->
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-
 <!-- GSAP Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -459,7 +452,7 @@
               labels: ['Python', 'C++', 'Java', 'C# & .NET', 'HTML/CSS/JS', 'SQL'],
               datasets: [{
                   label: 'Skill Level',
-                  data: [90, 85, 83, 83, 85, 88], 
+                  data: [90, 85, 83, 80, 85, 88], 
                   backgroundColor: primaryGlow,
                   borderColor: primaryColor,
                   pointBackgroundColor: primaryColor,
@@ -474,8 +467,8 @@
               maintainAspectRatio: false,
               scales: {
                   r: {
-                      min = 0, 
-                      max = 100,
+                      min: 0,
+                      max: 100,
                       angleLines: {
                           color: 'rgba(255, 255, 255, 0.1)' 
                       },
@@ -491,9 +484,7 @@
                           }
                       },
                       ticks: {
-                          display: false, 
-                          min: 0,
-                          max: 100
+                          display: false 
                       }
                   }
               },
