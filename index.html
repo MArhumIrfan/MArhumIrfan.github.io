@@ -36,12 +36,64 @@
             color: var(--text-main);
             padding: 40px 20px;
             min-height: 100vh;
+            /* Prevents scrolling while loading screen is active */
+            overflow-x: hidden; 
         }
 
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* --- Global Loading Screen --- */
+        #global-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-dark);
+            z-index: 9999; /* Keeps it on top of everything */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(158, 179, 194, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-family: 'Talina', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* The class JavaScript will use to fade out the screen */
+        .hide-loader {
+            opacity: 0 !important;
+            visibility: hidden !important;
         }
 
         h1, h2, h3, h4 {
@@ -220,7 +272,6 @@
             box-shadow: 0 4px 15px var(--primary-glow);
         }
 
-        /* The clickable button part */
         .dropdown-card summary {
             font-family: 'Talina', sans-serif; 
             letter-spacing: 1px;
@@ -229,7 +280,7 @@
             font-weight: normal;
             color: var(--text-main);
             cursor: pointer;
-            list-style: none; /* Hides default triangle */
+            list-style: none; 
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -237,12 +288,10 @@
             transition: all 0.3s ease;
         }
 
-        /* Hide the default webkit triangle for Safari/Chrome */
         .dropdown-card summary::-webkit-details-marker {
             display: none;
         }
 
-        /* Create our own custom animated arrow */
         .dropdown-card summary::after {
             content: '▼';
             color: var(--primary);
@@ -250,7 +299,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Flip the arrow when the dropdown is open */
         .dropdown-card[open] summary::after {
             transform: rotate(180deg);
         }
@@ -260,7 +308,6 @@
             color: var(--primary);
         }
 
-        /* The list of projects inside */
         .dropdown-card ul {
             padding: 20px 25px;
             list-style: none;
@@ -288,10 +335,16 @@
 </head>   
 <body>
 
+<!-- THE LOADING SCREEN -->
+<div id="global-loader">
+    <div class="spinner"></div>
+    <div class="loader-text">Booting System...</div>
+</div>
+
 <section>
     <h1> Welcome to my personal portfolio! </h1>
 
-    <!-- Free-floating 3D Model -->
+    <!-- 3D Model: Loading attributes removed so it loads silently behind the scenes! -->
     <model-viewer 
         class="floating-model"
         src="./models/commodore64.glb" 
@@ -316,7 +369,6 @@
     <p>A breakdown of my technical stack and programming proficiencies.</p>
     <p>(May be updated with time.)</p>
     
-    <!-- FIX: Removed flexbox properties so the canvas is forced to take up space -->
     <div style="position: relative; height: 400px; width: 100%; margin-top: 30px;">
         <canvas id="skillsRadarChart"></canvas>
     </div>
@@ -396,6 +448,26 @@
     <button onclick="alert('Thank you for visiting my portfolio!')">Click Me</button>
 </section> 
 
+<!-- Loading Screen Logic -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loader = document.getElementById('global-loader');
+        const modelViewer = document.querySelector('model-viewer');
+
+        // This listens specifically for the 3D model to finish rendering
+        modelViewer.addEventListener('load', () => {
+            loader.classList.add('hide-loader');
+        });
+
+        // Safety Fallback: If the network is very slow, force the screen to hide after 8 seconds
+        setTimeout(() => {
+            if (!loader.classList.contains('hide-loader')) {
+                loader.classList.add('hide-loader');
+            }
+        }, 8000); 
+    });
+</script>
+
 <!-- GSAP Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -404,7 +476,6 @@
 <script>
   gsap.registerPlugin(ScrollTrigger);
   
-  // Animate the main sections
   const sections = document.querySelectorAll("section");
   sections.forEach((section) => {
     gsap.from(section, {
@@ -420,7 +491,6 @@
     });
   });
 
-  // Animate the individual dropdown cards specifically
   gsap.from(".dropdown-card", {
     scrollTrigger: {
       trigger: ".portfolio-dropdowns",
@@ -435,7 +505,6 @@
   });
 </script>
 
-<!-- Chart.js Library -->
 <!-- Explicitly load the stable UMD version of Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
@@ -444,7 +513,7 @@
   document.addEventListener('DOMContentLoaded', function() {
       try {
           const canvas = document.getElementById('skillsRadarChart');
-          if (!canvas) return; // Prevents crashing if the canvas is missing
+          if (!canvas) return; 
           
           const ctx = canvas.getContext('2d');
           const primaryColor = '#9EB3C2'; 
@@ -456,7 +525,7 @@
                   labels: ['Python', 'C++', 'Java', 'C# & .NET', 'HTML/CSS/JS', 'SQL'],
                   datasets: [{
                       label: 'Skill Level',
-                      data: [85, 85, 73, 50, 73, 78], 
+                      data: [85, 85, 73, 50, 73, 80], 
                       backgroundColor: primaryGlow,
                       borderColor: primaryColor,
                       pointBackgroundColor: primaryColor,
@@ -471,7 +540,6 @@
                   maintainAspectRatio: false,
                   scales: {
                       r: {
-                          // Safer syntax for forcing the 0-100 scale
                           suggestedMin: 0,
                           suggestedMax: 100,
                           angleLines: {
