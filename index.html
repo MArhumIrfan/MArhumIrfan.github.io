@@ -454,9 +454,14 @@
         const loader = document.getElementById('global-loader');
         const modelViewer = document.querySelector('model-viewer');
 
-        // This listens specifically for the 3D model to finish rendering
+        // Listen for the file to finish downloading
         modelViewer.addEventListener('load', () => {
-            loader.classList.add('hide-loader');
+            
+            // ADDED FIX: Wait an extra 800ms to allow the GPU to paint the 3D object on screen
+            setTimeout(() => {
+                loader.classList.add('hide-loader');
+            }, 800); 
+            
         });
 
         // Safety Fallback: If the network is very slow, force the screen to hide after 8 seconds
