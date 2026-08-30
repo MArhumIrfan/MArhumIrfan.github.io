@@ -17,6 +17,7 @@
          lives in this single file, so the page renders correctly no matter
          how it's opened — it never depends on a separate CSS or font file
          being present alongside it. -->
+
     <style>
 /* =========================================================
    Muhammad Arhum Irfan — Portfolio
@@ -581,15 +582,15 @@ h3 { font-size: 1.2rem; }
 
 <header class="site-header">
     <nav class="nav">
-        <a class="logo" href="#top">arhum<span class="cursor">_</span></a>
+      <a class="logo" href="#top">arhum <span id="changing-name">developer</span><span class="cursor">_</span></a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
             <span></span><span></span><span></span>
         </button>
         <ul class="nav-links" id="nav-links">
-            <li><a href="#about">about</a></li>
-            <li><a href="#skills">skills</a></li>
-            <li><a href="#portfolio">portfolio</a></li>
-            <li><a href="#contact">contact</a></li>
+            <li><a href="#About">about</a></li>
+            <li><a href="#Skills">skills</a></li>
+            <li><a href="#Portfolio">portfolio</a></li>
+            <li><a href="#Contact">contact</a></li>
         </ul>
     </nav>
 </header>
@@ -900,6 +901,49 @@ if ('IntersectionObserver' in window) {
 } else {
     whenIdle(initChart);
 }
+</script>
+
+<script>
+    const words = ["developer", "coder", "designer", "student"];
+    let i = 0;
+    let timer;
+
+    function typingEffect() {
+        document.getElementById('changing-name').innerHTML = "";
+        let word = words[i].split("");
+        var loopTyping = function() {
+            if (word.length > 0) {
+                document.getElementById('changing-name').innerHTML += word.shift();
+            } else {
+                setTimeout(deletingEffect, 2000);
+                return;
+            }
+            timer = setTimeout(loopTyping, 150);
+        };
+        loopTyping();
+    }
+
+    function deletingEffect() {
+        let word = words[i].split("");
+        var loopDeleting = function() {
+            if (word.length > 0) {
+                word.pop();
+                document.getElementById('changing-name').innerHTML = word.join("");
+            } else {
+                if (words.length > (i + 1)) {
+                    i++;
+                } else {
+                    i = 0;
+                }
+                setTimeout(typingEffect, 500);
+                return;
+            }
+            timer = setTimeout(loopDeleting, 100);
+        };
+        loopDeleting();
+    }
+
+    typingEffect();
 </script>
 
 </body>
