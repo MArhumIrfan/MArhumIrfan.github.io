@@ -1,596 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Arhum - Personal Portfolio </title>
+    <meta name="description" content="Muhammad Arhum Irfan — software developer portfolio. Projects in Python, C++, Java, C# and web development.">
+    <meta name="theme-color" content="#14171c">
+    <title>Muhammad Arhum Irfan — Software Developer</title>
     <link rel="icon" type="image/x-icon" href="./images/goggame-1525634891.ico">
-    
-    <style>
-        @font-face {
-            font-family: 'Talina';
-            src: url('https://marhumirfan.github.io/fonts/talina.otf') format('opentype'); 
-            font-weight: normal;
-            font-style: normal;
-        }
 
-        :root {
-            --primary: #9EB3C2; 
-            --primary-glow: rgba(158, 179, 194, 0.4); 
-            --bg-dark: #21295C; 
-            --card-bg: rgba(27, 59, 111, 0.6); 
-            --text-main: #f8fafc; 
-        }
+    <!-- Warm up connections to the third-party origins we lazy-load below,
+         without actually fetching anything yet. -->
+    <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- The display font is needed immediately for the hero heading, so it's
+         preloaded rather than discovered late via the CSS @font-face. -->
+    <link rel="preload" href="./talina.otf" as="font" type="font/otf" crossorigin>
 
-        body {
-            background: linear-gradient(-45deg, #21295C, #1B3B6F, #065A82, #1C7293);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--text-main);
-            padding: 40px 20px;
-            min-height: 100vh;
-            /* Prevents scrolling while loading screen is active */
-            overflow-x: hidden; 
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* --- Global Loading Screen --- */
-        #global-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-dark);
-            z-index: 9999; /* Keeps it on top of everything */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--primary);
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(158, 179, 194, 0.2);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loader-text {
-            font-family: 'Talina', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* The class JavaScript will use to fade out the screen */
-        .hide-loader {
-            opacity: 0 !important;
-            visibility: hidden !important;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Talina', sans-serif; 
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        section {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 40px;
-            margin: 0 auto 40px auto;
-            max-width: 900px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px 0 var(--primary-glow);
-            border: 1px solid rgba(158, 179, 194, 0.2);
-        }
-
-        .container {
-            position: relative;
-            width: 250px;
-            border-radius: 50%;
-            margin-bottom: 30px;
-            overflow: hidden;
-            box-shadow: 0 0 20px var(--primary-glow);
-        }
-
-        .container img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            transition: transform 0.5s ease;
-        }
-
-        .container:hover img {
-            transform: scale(1.1);
-        }
-
-        .overlay {
-            position: absolute; 
-            bottom: 0; 
-            background: rgba(158, 179, 194, 0.8);
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: .5s ease;
-            opacity: 0;
-            color: #000;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .container:hover .overlay {
-            opacity: 1;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        th {
-            background: rgba(158, 179, 194, 0.1);
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        li {
-            background: rgba(0, 0, 0, 0.3);
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-
-        li:hover {
-            transform: translateX(10px);
-            background: rgba(158, 179, 194, 0.1);
-        }
-
-        button {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-        }
-
-        button:hover {
-            background: var(--primary);
-            color: #000;
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-            
-        /* Floating 3D Model Styling */
-        .floating-model {
-            display: block;
-            width: 100%;
-            max-width: 500px;
-            height: 400px;
-            margin: 0 auto 30px auto;
-            background-color: transparent;
-            filter: drop-shadow(0 0 25px rgba(158, 179, 194, 0.4));
-            outline: none;
-            cursor: grab;
-        }
-
-        .floating-model:active {
-            cursor: grabbing;
-        }
-
-        /* --- Interactive Dropdown Portfolio --- */
-        .portfolio-dropdowns {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .dropdown-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .dropdown-card:hover {
-            box-shadow: 0 4px 15px var(--primary-glow);
-        }
-
-        .dropdown-card summary {
-            font-family: 'Talina', sans-serif; 
-            letter-spacing: 1px;
-            padding: 20px 25px;
-            font-size: 1.2rem;
-            font-weight: normal;
-            color: var(--text-main);
-            cursor: pointer;
-            list-style: none; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-card summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .dropdown-card summary::after {
-            content: '▼';
-            color: var(--primary);
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-        }
-
-        .dropdown-card[open] summary::after {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-card summary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--primary);
-        }
-
-        .dropdown-card ul {
-            padding: 20px 25px;
-            list-style: none;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .dropdown-card li {
-            font-family: 'Talina', sans-serif;
-            letter-spacing: 1px;
-            background: transparent;
-            border: none;
-            border-left: 2px solid var(--primary-glow);
-            padding: 8px 15px;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            color: var(--text-main);
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-card li:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-        }
-    </style>
-</head>   
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
-<!-- THE LOADING SCREEN -->
-<div id="global-loader">
-    <div class="spinner"></div>
-    <div class="loader-text">Booting System...</div>
-</div>
+<header class="site-header">
+    <nav class="nav">
+        <a class="logo" href="#top">arhum<span class="cursor">_</span></a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about">about</a></li>
+            <li><a href="#skills">skills</a></li>
+            <li><a href="#portfolio">portfolio</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-<section>
-    <h1> Welcome to my personal portfolio! </h1>
+<main>
+    <section id="top" class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <p class="eyebrow">// software developer</p>
+                <h1>Muhammad Arhum Irfan</h1>
+                <p class="hero-lede">
+                    I build practical, well-structured software across desktop, web and mobile —
+                    from GUI utilities to full applications — and I'm steadily picking up new
+                    languages and frameworks along the way.
+                </p>
+                <div class="hero-actions">
+                    <a href="#portfolio" class="btn btn-primary">View my work</a>
+                    <a href="/Documents/m.arhum.irfan_cv_resume.pdf" download="Arhum_Irfan_CV.pdf" class="btn btn-ghost">Download CV</a>
+                </div>
+            </div>
+            <div class="hero-model" id="hero-model">
+                <div class="model-spinner" id="model-spinner"><span></span></div>
+                <!-- The <model-viewer> element and its .glb asset are injected by
+                     JS after the page has painted (see lazy-load script below),
+                     so this ~150KB library and the 3D file never block first load. -->
+            </div>
+        </div>
+    </section>
 
-    <!-- 3D Model: Loading attributes removed so it loads silently behind the scenes! -->
-    <model-viewer 
-        class="floating-model"
-        src="./models/commodore64.glb" 
-        alt="3D Computer Model" 
-        auto-rotate 
-        rotation-per-second="30deg"
-        camera-controls 
-        disable-zoom
-        shadow-intensity="2"
-        exposure="1.2">
-    </model-viewer>
-    
-    <p> My name is Muhammad Arhum Irfan and I am a software developer. </p>
-    <p>I have experience in various programming languages and frameworks.</p>
-    <p>I am passionate about creating innovative solutions and continuously learning new technologies.</p>    
-    <button type="button" onclick="document.getElementById('demo').innerHTML = Date()"> Click me to display Date</button>
-    <p id="demo"></p>
-</section>
+    <section id="about" class="section section-alt">
+        <div class="about-grid">
+            <div class="avatar" aria-hidden="true">AI</div>
+            <div class="about-text">
+                <p class="eyebrow">About</p>
+                <h2>A bit about me</h2>
+                <p>
+                    I'm a software developer with hands-on experience across Python, C++, Java,
+                    C# and web technologies. I enjoy taking a problem apart, choosing the right
+                    tool for it, and building something that actually works end to end — whether
+                    that's a desktop GUI, a small game, or a web interface.
+                </p>
+                <p>
+                    Most of my projects start as a way to learn something new: a language feature,
+                    a design pattern, or just a type of application I haven't built before. That
+                    habit is reflected in the range of work in my portfolio below.
+                </p>
+            </div>
+        </div>
+    </section>
 
-<section>
-    <h2>Skills & Technologies</h2>
-    <p>A breakdown of my technical stack and programming proficiencies.</p>
-    <p>(May be updated with time.)</p>
-    
-    <div style="position: relative; height: 400px; width: 100%; margin-top: 30px;">
-        <canvas id="skillsRadarChart"></canvas>
-    </div>
-</section>
-    
-<section>
-    <h2>Development Portfolio</h2>
-    <p>Click on any language or framework to expand and view the associated projects.</p>
-    
-    <div class="portfolio-dropdowns">
-        <!-- Python -->
-        <details class="dropdown-card">
-            <summary>Python</summary>
-            <ul>
-                <li>Full-Stack Gym Management System (SSMS & Tkinter)</li>
-                <li>GUI Morse code learning system</li>
-                <li>SecurePass Pro (GUI Password Generator)</li>
-                <li>GUI Calculator</li>
-                <li>Interactive Morse Code Learning System</li>
-                <li>Inventory Sorting System CLI</li>
-                <li>Multi-Menu GUI Calculator Suite</li>
-                <li>Text based Inventory Sorting System</li>
-            </ul>
-        </details>
+    <section id="skills" class="section">
+        <p class="eyebrow">Skills</p>
+        <h2>Technical proficiency</h2>
+        <p class="section-lede">A rough breakdown of my comfort level across the languages and stacks I work in most.</p>
+        <div class="chart-wrap">
+            <canvas id="skillsRadarChart"></canvas>
+        </div>
+    </section>
 
-        <!-- C++ -->
-        <details class="dropdown-card">
-            <summary>C++</summary>
-            <ul>
-                <li>OpenGL Graphic Programming</li>
-                <li>Mini E-commerce Simulation</li>
-                <li>Management System GUI</li>
-                <li>Basic 2D Game</li>
-                <li>Text & GUI Notepad Applications</li>
-                <li>TCP Client User Software</li>
-                <li>UI based Notepad</li>
-                <li>console based Notepad</li> 
-            </ul>
-        </details>
+    <section id="portfolio" class="section section-alt">
+        <p class="eyebrow">Portfolio</p>
+        <h2>Development portfolio</h2>
+        <p class="section-lede">Grouped by language — expand a category to see the projects in it.</p>
 
-        <!-- Java -->
-        <details class="dropdown-card">
-            <summary>Java</summary>
-            <ul>
-                <li>Library Management System GUI</li>
-                <li>Text & GUI Notepad Applications</li>
-                <li>Calculator Suite</li>
-            </ul>
-        </details>
+        <div class="portfolio-dropdowns">
+            <details class="dropdown-card">
+                <summary>Python <span class="count">8 projects</span></summary>
+                <ul>
+                    <li>Full-Stack Gym Management System (SSMS &amp; Tkinter)</li>
+                    <li>GUI Morse code learning system</li>
+                    <li>SecurePass Pro (GUI password generator)</li>
+                    <li>GUI calculator</li>
+                    <li>Interactive Morse code learning system</li>
+                    <li>Inventory sorting system (CLI)</li>
+                    <li>Multi-menu GUI calculator suite</li>
+                    <li>Text-based inventory sorting system</li>
+                </ul>
+            </details>
 
-        <!-- Web & UI/UX -->
-        <details class="dropdown-card">
-            <summary>Web, HTML & Design</summary>
-            <ul>
-                <li>iBoss Games Web Architecture Redesign (Figma)</li>
-                <li>Personal Portfolio Website (HTML/CSS/JS)</li>
-                <li>Interactive To-Do List with Live Calendar</li>
-                <li>Financial Tracker Web GUI</li>
-            </ul>
-        </details>
+            <details class="dropdown-card">
+                <summary>C++ <span class="count">8 projects</span></summary>
+                <ul>
+                    <li>OpenGL graphics programming</li>
+                    <li>Mini e-commerce simulation</li>
+                    <li>Management system GUI</li>
+                    <li>Basic 2D game</li>
+                    <li>Text &amp; GUI notepad applications</li>
+                    <li>TCP client user software</li>
+                    <li>UI-based notepad</li>
+                    <li>Console-based notepad</li>
+                </ul>
+            </details>
 
-        <!-- C# & Mobile -->
-        <details class="dropdown-card">
-            <summary>C#, Android & Other</summary>
-            <ul>
-                <li>Android Financial Tracker Application</li>
-                <li>Android Random Number Guessing Game</li>
-                <li>C# Console Calculator</li>
-                <li>C# Console Based Libray Management System</li>
-                <li>First-Person Shooter (Scratch Engine)</li>
-                <li>SQL based Gym Management system</li>
-            </ul>
-        </details>
-    </div>
-</section>
+            <details class="dropdown-card">
+                <summary>Java <span class="count">3 projects</span></summary>
+                <ul>
+                    <li>Library management system GUI</li>
+                    <li>Text &amp; GUI notepad applications</li>
+                    <li>Calculator suite</li>
+                </ul>
+            </details>
 
-<section>
-    <h4>Contact Information</h4>    
-    <p><strong>Instagram:</strong> @m.arhum.irfan <a href="https://www.instagram.com/m.arhum.irfan/" target="_blank">View Profile</a></p>
-    <p> Please feel free to explore my projects and contact me for any inquiries or collaborations. </p>
-    <p><strong>Email:</strong> arhumirfan2022@gmail.com</p>
-    <p><strong>Phone:</strong> Coming Soon!</p>
-    <div style = "margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1) ;">
-        <p style="margin-bottom: 10px;">Want to see my full professional background?</p>
-        <a href="/Documnets/m.arhum.irfan_cv_resume.pdf" download="Arhum_Irfan_CV.pdf">
-            <button type="button">Download My CV</button>
-        </a>
-    </div>
-    <button onclick="alert('Thank you for visiting my portfolio!')">Click Me</button>
-</section> 
+            <details class="dropdown-card">
+                <summary>Web, HTML &amp; Design <span class="count">4 projects</span></summary>
+                <ul>
+                    <li>iBoss Games web architecture redesign (Figma)</li>
+                    <li>Personal portfolio website (HTML/CSS/JS)</li>
+                    <li>Interactive to-do list with live calendar</li>
+                    <li>Financial tracker web GUI</li>
+                </ul>
+            </details>
 
-<!-- Loading Screen Logic -->
+            <details class="dropdown-card">
+                <summary>C#, Android &amp; Other <span class="count">6 projects</span></summary>
+                <ul>
+                    <li>Android financial tracker application</li>
+                    <li>Android random number guessing game</li>
+                    <li>C# console calculator</li>
+                    <li>C# console-based library management system</li>
+                    <li>First-person shooter (Scratch engine)</li>
+                    <li>SQL-based gym management system</li>
+                </ul>
+            </details>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <p class="eyebrow">Contact</p>
+        <h2>Let's talk</h2>
+        <p class="section-lede">Feel free to reach out about projects, collaborations, or just to say hi.</p>
+
+        <div class="contact-grid">
+            <a class="contact-card" href="mailto:arhumirfan2022@gmail.com">
+                <span class="label">Email</span>
+                <span class="value">arhumirfan2022@gmail.com</span>
+            </a>
+            <a class="contact-card" href="https://www.instagram.com/m.arhum.irfan/" target="_blank" rel="noopener noreferrer">
+                <span class="label">Instagram</span>
+                <span class="value">@m.arhum.irfan</span>
+            </a>
+            <a class="contact-card" href="/Documents/m.arhum.irfan_cv_resume.pdf" download="Arhum_Irfan_CV.pdf">
+                <span class="label">Resume</span>
+                <span class="value">Download my CV (PDF)</span>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 Muhammad Arhum Irfan. All rights reserved.</p>
+</footer>
+
+<!-- Mobile nav toggle -->
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const loader = document.getElementById('global-loader');
-        const modelViewer = document.querySelector('model-viewer');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
 
-        // Listen for the file to completely finish downloading
-        modelViewer.addEventListener('load', () => {
-            
-            // Wait an extra 800ms for the GPU to paint it
-            setTimeout(() => {
-                loader.classList.add('hide-loader');
-            }, 800); 
-            
+    navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
         });
+    });
+</script>
 
-        // THE FIX: Increased the fallback from 8 seconds to 60 seconds (60000ms)
-        // Now the loading screen will stay up the entire time the massive file downloads!
-        setTimeout(() => {
-            if (!loader.classList.contains('hide-loader')) {
-                loader.classList.add('hide-loader');
+<script>
+/* =========================================================
+   Lazy-loading strategy
+   ---------------------------------------------------------
+   Nothing below fetches a byte of third-party JS or the 3D
+   model until it's actually going to be used. Each piece
+   loads independently via requestIdleCallback (falls back to
+   a short setTimeout on Safari, which lacks it), and the
+   heaviest one — the 3D model — only starts once its
+   container has actually scrolled into view.
+   ========================================================= */
+
+function loadScript(src, attrs = {}) {
+    return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        Object.entries(attrs).forEach(([k, v]) => s.setAttribute(k, v));
+        s.onload = resolve;
+        s.onerror = reject;
+        document.body.appendChild(s);
+    });
+}
+
+function whenIdle(fn) {
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(fn, { timeout: 2000 });
+    } else {
+        setTimeout(fn, 200);
+    }
+}
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- 3D model: load only once it's visible on screen ---------- */
+function initModel() {
+    const container = document.getElementById('hero-model');
+    const spinner = document.getElementById('model-spinner');
+
+    loadScript('https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js', { type: 'module' })
+        .then(() => customElements.whenDefined('model-viewer'))
+        .then(() => {
+            const mv = document.createElement('model-viewer');
+            mv.id = 'c64-model';
+            mv.className = 'floating-model';
+            mv.setAttribute('src', './models/commodore64.glb');
+            mv.setAttribute('alt', 'A rotating 3D model of a Commodore 64 computer');
+            if (!prefersReducedMotion) {
+                mv.setAttribute('auto-rotate', '');
+                mv.setAttribute('rotation-per-second', '20deg');
             }
-        }, 60000); 
+            mv.setAttribute('camera-controls', '');
+            mv.setAttribute('disable-zoom', '');
+            mv.setAttribute('shadow-intensity', '1.5');
+            mv.setAttribute('exposure', '1.1');
+            mv.addEventListener('load', () => {
+                mv.classList.add('is-ready');
+                spinner.classList.add('is-hidden');
+            });
+            mv.addEventListener('error', () => spinner.classList.add('is-hidden'));
+            container.appendChild(mv);
+            // Belt-and-suspenders: never let the spinner linger indefinitely.
+            setTimeout(() => spinner.classList.add('is-hidden'), 8000);
+        })
+        .catch(() => spinner.classList.add('is-hidden'));
+}
+
+const heroModelEl = document.getElementById('hero-model');
+if ('IntersectionObserver' in window) {
+    const modelObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                obs.disconnect();
+                whenIdle(initModel);
+            }
+        });
+    }, { rootMargin: '200px' });
+    modelObserver.observe(heroModelEl);
+} else {
+    whenIdle(initModel);
+}
+
+/* ---------- GSAP scroll reveal: load once idle, skip entirely if the
+   visitor asked for reduced motion ---------- */
+if (!prefersReducedMotion) {
+    whenIdle(() => {
+        Promise.all([
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js'),
+        ]).then(() => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            document.querySelectorAll('main > section').forEach((section) => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse',
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                });
+            });
+
+            gsap.from('.dropdown-card', {
+                scrollTrigger: {
+                    trigger: '.portfolio-dropdowns',
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse',
+                },
+                y: 24,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'power2.out',
+            });
+        });
     });
-</script>
+}
 
-<!-- GSAP Libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+/* ---------- Chart.js radar: load only once the Skills section is
+   actually approaching the viewport ---------- */
+function initChart() {
+    const canvas = document.getElementById('skillsRadarChart');
+    if (!canvas) return;
 
-<!-- Custom GSAP Animation -->
-<script>
-  gsap.registerPlugin(ScrollTrigger);
-  
-  const sections = document.querySelectorAll("section");
-  sections.forEach((section) => {
-    gsap.from(section, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-      y: 80,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
+    loadScript('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js').then(() => {
+        const styles = getComputedStyle(document.documentElement);
+        const accent = styles.getPropertyValue('--accent').trim() || '#d9a441';
+        const accentGlow = 'rgba(217, 164, 65, 0.25)';
+        const textSecondary = styles.getPropertyValue('--text-secondary').trim() || '#9aa4b2';
+
+        new Chart(canvas.getContext('2d'), {
+            type: 'radar',
+            data: {
+                labels: ['Python', 'C++', 'Java', 'C# & .NET', 'HTML/CSS/JS', 'SQL'],
+                datasets: [{
+                    label: 'Skill level',
+                    data: [85, 85, 73, 50, 73, 80],
+                    backgroundColor: accentGlow,
+                    borderColor: accent,
+                    pointBackgroundColor: accent,
+                    pointBorderColor: '#14171c',
+                    pointHoverBackgroundColor: '#14171c',
+                    pointHoverBorderColor: accent,
+                    borderWidth: 2,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.08)', circular: true },
+                        pointLabels: {
+                            color: textSecondary,
+                            font: { size: 13, family: 'system-ui, sans-serif' },
+                        },
+                        ticks: { display: false },
+                    },
+                },
+                plugins: {
+                    legend: { display: false },
+                },
+            },
+        });
     });
-  });
+}
 
-  gsap.from(".dropdown-card", {
-    scrollTrigger: {
-      trigger: ".portfolio-dropdowns",
-      start: "top 80%",
-      toggleActions: "play none none reverse",
-    },
-    y: 50,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: "back.out(1.7)" 
-  });
-</script>
-
-<!-- Explicitly load the stable UMD version of Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-<!-- Custom Spider Chart Setup -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-      try {
-          const canvas = document.getElementById('skillsRadarChart');
-          if (!canvas) return; 
-          
-          const ctx = canvas.getContext('2d');
-          const primaryColor = '#9EB3C2'; 
-          const primaryGlow = 'rgba(158, 179, 194, 0.4)';
-          
-          new Chart(ctx, {
-              type: 'radar',
-              data: {
-                  labels: ['Python', 'C++', 'Java', 'C# & .NET', 'HTML/CSS/JS', 'SQL'],
-                  datasets: [{
-                      label: 'Skill Level',
-                      data: [85, 85, 73, 50, 73, 80], 
-                      backgroundColor: primaryGlow,
-                      borderColor: primaryColor,
-                      pointBackgroundColor: primaryColor,
-                      pointBorderColor: '#fff',
-                      pointHoverBackgroundColor: '#fff',
-                      pointHoverBorderColor: primaryColor,
-                      borderWidth: 2,
-                  }]
-              },
-              options: {
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  scales: {
-                      r: {
-                          suggestedMin: 0,
-                          suggestedMax: 100,
-                          angleLines: {
-                              color: 'rgba(255, 255, 255, 0.1)' 
-                          },
-                          grid: {
-                              color: 'rgba(255, 255, 255, 0.1)', 
-                              circular: true
-                          },
-                          pointLabels: {
-                              color: '#f8fafc', 
-                              font: {
-                                  size: 14,
-                                  family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
-                              }
-                          },
-                          ticks: {
-                              display: false 
-                          }
-                      }
-                  },
-                  plugins: {
-                      legend: {
-                          display: false 
-                      }
-                  }
-              }
-          });
-      } catch (error) {
-          console.error("Chart Error: ", error);
-          alert("Chart failed to load. Check console for details.");
-      }
-  });
+const skillsSection = document.getElementById('skills');
+if ('IntersectionObserver' in window) {
+    const chartObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                obs.disconnect();
+                initChart();
+            }
+        });
+    }, { rootMargin: '300px' });
+    chartObserver.observe(skillsSection);
+} else {
+    whenIdle(initChart);
+}
 </script>
 
 </body>
