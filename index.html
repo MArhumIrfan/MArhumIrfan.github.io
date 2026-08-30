@@ -10,7 +10,6 @@
 
     <!-- Warm up connections to the third-party origins we lazy-load below,
          without actually fetching anything yet. -->
-    <link rel="preconnect" href="https://ajax.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
@@ -39,25 +38,18 @@
 
 <main>
     <section id="top" class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
         <div class="hero-inner">
-            <div class="hero-text">
-                <p class="eyebrow">// software developer</p>
-                <h1>Muhammad Arhum Irfan</h1>
-                <p class="hero-lede">
-                    I build practical, well-structured software across desktop, web and mobile —
-                    from GUI utilities to full applications — and I'm steadily picking up new
-                    languages and frameworks along the way.
-                </p>
-                <div class="hero-actions">
-                    <a href="#portfolio" class="btn btn-primary">View my work</a>
-                    <a href="/Documents/m.arhum.irfan_cv_resume.pdf" download="Arhum_Irfan_CV.pdf" class="btn btn-ghost">Download CV</a>
-                </div>
-            </div>
-            <div class="hero-model" id="hero-model">
-                <div class="model-spinner" id="model-spinner"><span></span></div>
-                <!-- The <model-viewer> element and its .glb asset are injected by
-                     JS after the page has painted (see lazy-load script below),
-                     so this ~150KB library and the 3D file never block first load. -->
+            <p class="eyebrow">// software developer</p>
+            <h1>Muhammad Arhum Irfan</h1>
+            <p class="hero-lede">
+                I build practical, well-structured software across desktop, web and mobile —
+                from GUI utilities to full applications — and I'm steadily picking up new
+                languages and frameworks along the way.
+            </p>
+            <div class="hero-actions">
+                <a href="#portfolio" class="btn btn-primary">View my work</a>
+                <a href="/Documents/m.arhum.irfan_cv_resume.pdf" download="Arhum_Irfan_CV.pdf" class="btn btn-ghost">Download CV</a>
             </div>
         </div>
     </section>
@@ -235,54 +227,6 @@ function whenIdle(fn) {
 }
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---------- 3D model: load only once it's visible on screen ---------- */
-function initModel() {
-    const container = document.getElementById('hero-model');
-    const spinner = document.getElementById('model-spinner');
-
-    loadScript('https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js', { type: 'module' })
-        .then(() => customElements.whenDefined('model-viewer'))
-        .then(() => {
-            const mv = document.createElement('model-viewer');
-            mv.id = 'c64-model';
-            mv.className = 'floating-model';
-            mv.setAttribute('src', './models/commodore64.glb');
-            mv.setAttribute('alt', 'A rotating 3D model of a Commodore 64 computer');
-            if (!prefersReducedMotion) {
-                mv.setAttribute('auto-rotate', '');
-                mv.setAttribute('rotation-per-second', '20deg');
-            }
-            mv.setAttribute('camera-controls', '');
-            mv.setAttribute('disable-zoom', '');
-            mv.setAttribute('shadow-intensity', '1.5');
-            mv.setAttribute('exposure', '1.1');
-            mv.addEventListener('load', () => {
-                mv.classList.add('is-ready');
-                spinner.classList.add('is-hidden');
-            });
-            mv.addEventListener('error', () => spinner.classList.add('is-hidden'));
-            container.appendChild(mv);
-            // Belt-and-suspenders: never let the spinner linger indefinitely.
-            setTimeout(() => spinner.classList.add('is-hidden'), 8000);
-        })
-        .catch(() => spinner.classList.add('is-hidden'));
-}
-
-const heroModelEl = document.getElementById('hero-model');
-if ('IntersectionObserver' in window) {
-    const modelObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                obs.disconnect();
-                whenIdle(initModel);
-            }
-        });
-    }, { rootMargin: '200px' });
-    modelObserver.observe(heroModelEl);
-} else {
-    whenIdle(initModel);
-}
 
 /* ---------- GSAP scroll reveal: load once idle, skip entirely if the
    visitor asked for reduced motion ---------- */

@@ -250,80 +250,60 @@ h3 { font-size: 1.2rem; }
 
 /* ---------- Hero ---------- */
 .hero {
-    padding: 160px 24px 100px;
+    position: relative;
+    padding: 180px 24px 130px;
     max-width: var(--max-width);
     margin: 0 auto;
+    overflow: hidden;
+}
+
+/* The one deliberate flourish on the page: a quiet, slow-drifting glow
+   behind the name. Everything else stays flat and still. */
+.hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    opacity: 0.18;
+    filter: blur(10px);
+    transform: translate(-50%, -50%);
+    animation: drift 14s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes drift {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -46%) scale(1.08); }
 }
 
 .hero-inner {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
-    gap: 40px;
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-inner .eyebrow {
+    display: flex;
+    justify-content: center;
 }
 
 .hero-lede {
     color: var(--text-secondary);
     font-size: 1.05rem;
     max-width: 46ch;
-    margin: 18px 0 32px;
+    margin: 18px auto 32px;
 }
 
 .hero-actions {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-}
-
-.hero-model {
-    position: relative;
-    height: 380px;
-}
-
-.floating-model {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    filter: drop-shadow(0 0 25px var(--accent-glow));
-    outline: none;
-    cursor: grab;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
-
-.floating-model.is-ready {
-    opacity: 1;
-}
-
-.floating-model:active {
-    cursor: grabbing;
-}
-
-.model-spinner {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    pointer-events: none;
-}
-
-.model-spinner span {
-    width: 34px;
-    height: 34px;
-    border: 3px solid var(--surface-border);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 0.9s linear infinite;
-}
-
-.model-spinner.is-hidden {
-    display: none;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
 }
 
 /* ---------- Sections ---------- */
@@ -519,18 +499,13 @@ h3 { font-size: 1.2rem; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
-    .hero-inner {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-model {
-        order: -1;
-        height: 260px;
-    }
-
     .about-grid {
         grid-template-columns: 1fr;
         text-align: left;
+    }
+
+    .about-grid .avatar {
+        margin: 0 auto;
     }
 }
 
